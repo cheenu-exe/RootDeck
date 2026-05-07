@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login</title>
+  </head>
+  <body>
+    <div class="brand">
+      <img src="/imgs/RootDeck.png" alt="logo" />
+      <h1>Welcome to Root Deck</h1>
+      <h3>A Smart Deck for Academics</h3>
+    </div>
+    <div class="right-panel">
+      <div class="buttons">
+        <button onclick="showstudent()" id="studentBtn">Student</button>
+        <button onclick="showstaff()" id="staffBtn">Staff</button>
+      </div>
+      {%with messages=get_flashed_messages()%} {%if messages %} {%for message in
+      messages%}
+      <div class="flash">{{message}}</div>
+      {%endfor%} {%endif%} {%endwith%}
+      <div class="tabs">
+        <div class="forms" id="forms">
+          <form class="log-form" action="/login" method="POST">
+            <input type="hidden" name="role" value="student" />
+            <input
+              type="email"
+              name="mail"
+              placeholder="Enter your official mail id.."
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              required
+            />
+            <button type="submit">login</button>
+          </form>
+          <form class="log-form" action="/login" method="POST">
+            <input type="hidden" name="role" value="student" />
+            <input
+              type="email"
+              name="mail"
+              placeholder="Enter your official mail id.."
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              required
+            />
+            <button type="submit">login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+  <style>
+    body {
+      display: flex;
+
+      height: 100vh;
+      margin: 0;
+
+      background: white;
+
+      font-family: "inter", sans-serif;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      width: 40%;
+      height: 100vh;
+      padding: 40px;
+
+      background: #14224b;
+      color: aliceblue;
+    }
+    .brand img {
+      width: 250px;
+    }
+    .right-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      width: 60%;
+    }
+    .buttons button {
+      padding: 12px 20px;
+      margin-bottom: 20px;
+
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      color: aliceblue;
+      background: grey;
+
+      font-weight: 600;
+    }
+    .tabs {
+      overflow: hidden;
+
+      width: 360px;
+      height: 380px;
+
+      background: white;
+
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+    .forms {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 200%;
+
+      transition: 0.5s ease;
+    }
+    .log-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      flex-shrink: 0;
+      justify-content: center;
+      align-items: center;
+
+      padding: 20px;
+      margin-top: 50px;
+      width: 50%;
+
+      box-sizing: border-box;
+    }
+    .log-form input {
+      width: 100%;
+      padding: 12px;
+
+      box-sizing: border-box;
+      border-radius: 8px;
+      border: 1px solid #333;
+    }
+    .log-form button {
+      width: 75%;
+      height: 5vh;
+
+      border-radius: 8px;
+      border: none;
+      background: #6566ee;
+      color: white;
+
+      font-weight: 600;
+    }
+    .buttons button.active {
+      background: #2e2f6e;
+      transition: 0.3s;
+    }
+    .flash {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      z-index: 9999;
+      transform: translateX(50%);
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: rgb(115, 186, 115);
+      color: white;
+      font-size: larger;
+      animation: flash-anm 3s ease forwards;
+    }
+    @keyframes flash-anm {
+      0% {
+        top: -20px;
+        opacity: 0;
+      }
+      15% {
+        top: 20px;
+        opacity: 1;
+      }
+      80% {
+        top: 20px;
+        opacity: 1;
+      }
+      100% {
+        top: -20px;
+        opacity: 0;
+      }
+    }
+    @media screen and (max-width: 768px){
+
+  body{
+    flex-direction: column;
+  }
+
+  .brand{
+    width: 100%;
+    height: auto;
+    padding: 30px 20px;
+  }
+
+  .brand img{
+    width: 140px;
+  }
+
+  .right-panel{
+    width: 100%;
+    padding: 20px;
+  }
+
+  .tabs{
+    width: 100%;
+    max-width: 350px;
+  }
+
+}
+  </style>
+  <script>
+    const staffBtn = document.getElementById("staffBtn");
+    const studentBtn = document.getElementById("studentBtn");
+    studentBtn.classList.add("active");
+    function showstaff() {
+      document.getElementById("forms").style.transform = "translateX(-50%)";
+      staffBtn.classList.add("active");
+      studentBtn.classList.remove("active");
+    }
+    function showstudent() {
+      document.getElementById("forms").style.transform = "translateX(0)";
+      studentBtn.classList.add("active");
+      staffBtn.classList.remove("active");
+    }
+  </script>
+</html>
